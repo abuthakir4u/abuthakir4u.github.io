@@ -108,7 +108,7 @@
             { asyncContext: event },
             function (asyncResult) {
                 console.log('asyncResult', asyncResult);
-                $('.from-data').html(asyncResult.value);
+                $('.from-data').html(asyncResult.value.emailaddress);
             }
         );
     }
