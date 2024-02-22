@@ -84,7 +84,6 @@
                 $('.subject-data').html(asyncResult.value)
             }
         );
-
         Office.context.mailbox.item.to.getAsync(
             { asyncContext: event },
             function (asyncResult) {
@@ -102,6 +101,12 @@
             { asyncContext: event },
             function (asyncResult) {
                 $('.body-data').html(asyncResult.value);
+            }
+        );
+        Office.context.mailbox.item.from.getAsync(
+            { asyncContext: event },
+            function (asyncResult) {
+                $('.from-data').html(asyncResult.value);
             }
         );
     }
