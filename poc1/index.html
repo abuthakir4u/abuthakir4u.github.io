@@ -84,21 +84,21 @@
         Office.context.mailbox.item.subject.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                $('from-subject').html(asyncResult.value)
+                $('.from-subject').html(asyncResult.value)
             }
         );
 
         Office.context.mailbox.item.to.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                $('from-subject').html(asyncResult.value[0].emailAddress);
+                $('.to-data').html(asyncResult.value[0].emailAddress);
             }
         );
 
         Office.context.mailbox.item.cc.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                $('from-cc').html(asyncResult.value[0].emailAddress);
+                $('.cc-data').html(asyncResult.value[0].emailAddress);
             }
         );
     }
