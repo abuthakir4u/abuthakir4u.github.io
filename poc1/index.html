@@ -81,7 +81,7 @@
         Office.context.mailbox.item.subject.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                $('.from-subject').html(asyncResult.value)
+                $('.subject-data').html(asyncResult.value)
             }
         );
 
