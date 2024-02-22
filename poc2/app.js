@@ -31,7 +31,7 @@ function validateToForExternal(event) {
             } else {
                 console.log('asyncResult', asyncResult);
                 console.log('not blocking email');
-                asyncResult.asyncContext.completed({ allowEvent: true });
+                asyncResult.asyncContext.completed({ allowEvent: false });
             }
         }
     );
