@@ -87,6 +87,7 @@
     // Check if the body contains a specific set of blocked words. If it contains the blocked words, block email from being sent. Otherwise allows sending.
     // <param name="asyncResult">MessageSend event passed from the calling function.</param>
     function checkBodyOnlyOnSendCallBack(asyncResult) {
+        console.log('inside checkBodyOnlyOnSendCallBack');
         var listOfBlockedWords = new Array("blockedword", "blockedword1", "blockedword2");
         var wordExpression = listOfBlockedWords.join('|');
 
