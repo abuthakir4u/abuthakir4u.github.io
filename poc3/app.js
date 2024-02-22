@@ -25,7 +25,7 @@ function validateToForDNE(event) {
                 asyncResult.value.forEach((toEmail) => {
                     console.log('looping to find entry of '+ toEmail);
                     if (sfDneEmails.indexOf(toEmail.emailAddress) !== -1) {
-                        dneEntriesInToEmail.push(toEmail);
+                        dneEntriesInToEmail.push(toEmail.emailAddress);
                     }
                 });
                 console.log('dneEntriesInToEmail', dneEntriesInToEmail);
