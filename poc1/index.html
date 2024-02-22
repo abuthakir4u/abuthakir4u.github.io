@@ -25,6 +25,7 @@
      * Writes 'Hello world!' to a new message body.
      */
     function sayHello() {
+        console.log('Office.context.mailbox.item', Office.context.mailbox.item);
         Office.context.mailbox.item.body.setAsync(
             "Hello world!",
             {
