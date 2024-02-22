@@ -107,6 +107,7 @@
         Office.context.mailbox.item.from.getAsync(
             { asyncContext: event },
             function (asyncResult) {
+                console.log('asyncResult', asyncResult);
                 $('.from-data').html(asyncResult.value);
             }
         );
