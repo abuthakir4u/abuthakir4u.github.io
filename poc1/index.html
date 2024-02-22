@@ -38,6 +38,8 @@
                 if (asyncResult.status ==
                     Office.AsyncResultStatus.Failed) {
                     write(asyncResult.error.message);
+                } else {
+                    write("Success...");
                 }
             }
         );
