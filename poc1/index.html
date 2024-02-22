@@ -48,9 +48,10 @@
     }
 
     async function run() {
+        console.log('inside run');
         // Get a reference to the current message
         const item = Office.context.mailbox.item;
-
+        console.log('item', item);
 
         // Write message property value to the task pane
         document.getElementById("item-subject").innerHTML = "<b>Subject:</b> <br/>" + item.subject;
