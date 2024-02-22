@@ -60,7 +60,7 @@
             { asyncContext: event },
             function (asyncResult) {
                 console.log('asyncResult', asyncResult);
-                document.getElementById("item-subject").innerHTML += "<b>To:</b> <br/>" + asyncResult.value;
+                document.getElementById("item-subject").innerHTML += "<b>To:</b> <br/>" + asyncResult.value[0];
             }
         );
     }
