@@ -15,69 +15,83 @@
 </head>
 
 <body>
-    <p>This add-in will insert the text 'Hello world!' in a new message.</p>
-    <button id="helloButton">Add text to body</button>
-    <button id="messageread">Read message10</button>
-    <div id="item-subject"></div>
-
-    <table class="table table-striped">
+    <h1>Read Email Form</h1>
+    <button id="messageread" class="btn btn-primary btn-sm">Fetch Email Form</button>
+    <table class="table">
+        <tr>
+            <td>From</td>
+            <td class="from-data"></td>
+        </tr>
+        <tr>
+            <td>To</td>
+            <td class="to-data"></td>
+        </tr>
+        <tr>
+            <td>CC</td>
+            <td class="cc-data"></td>
+        </tr>
         <tr>
             <td>Subject</td>
             <td class="subject-data"></td>
         </tr>
+        <tr>
+            <td>Body</td>
+            <td class="body-data"></td>
+        </tr>
       </table>
 
+    <button id="helloButton">Add text to body</button>
+
+    <h1>Manipulate Email Form</h1>
+
+    <button id="replace-body" class="btn btn-primary btn-sm">Replace Email Body</button>
+    
+    <div id="item-subject"></div>
 </body>
 
 <script>
 
     Office.onReady((info) => {
         if (info.host === Office.HostType.Outlook) {
-            document.getElementById("helloButton").onclick = sayHello;
+            document.getElementById("replace-body").onclick = replaceBody;
             document.getElementById("messageread").onclick = run;
         }
     });
 
-
     /**
      * Writes 'Hello world!' to a new message body.
      */
-    function sayHello() {
+    function replaceBody() {
         console.log('Office.context.mailbox.item', Office.context.mailbox.item);
         Office.context.mailbox.item.body.setAsync(
-            "Hello world!",
+            "Updated email body with plugin",
             {
                 coercionType: "html", // Write text as HTML
             },
-
             // Callback method to check that setAsync succeeded
             function (asyncResult) {
                 if (asyncResult.status ==
                     Office.AsyncResultStatus.Failed) {
-                    write(asyncResult.error.message);
+                    console.log(asyncResult.error.message);
                 } else {
-                    write("Success...");
+                    console.log("Success...");
                 }
             }
         );
     }
 
     async function run() {
-
-        $('.subject-data').html('tset');
-
         Office.context.mailbox.item.subject.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                document.getElementById("item-subject").innerHTML += "<b>Subject:</b> <br/>" + asyncResult.value;
+                $('from-subject').html(asyncResult.value)
             }
         );
 
         Office.context.mailbox.item.to.getAsync(
             { asyncContext: event },
             function (asyncResult) {
-                console.log('asyncResult', asyncResult);
-                document.getElementById("item-subject").innerHTML += "<b>To:</b> <br/>" + asyncResult.value[0].emailAddress;
+                $('from-subject').html(asyncResult.value[0].emailAddress);
             }
         );
     }
