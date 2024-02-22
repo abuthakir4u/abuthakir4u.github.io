@@ -12,6 +12,7 @@ Office.initialize = function (reason) {
 }
 
 function validateToForDNE(event) {
+    console.log('Inside validateToForDNE');
     let dneEntriesInToEmail = [];
     mailboxItem.to.getAsync(
         { asyncContext: event },
