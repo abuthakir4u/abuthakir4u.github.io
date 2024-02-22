@@ -29,6 +29,7 @@ function validateToForExternal(event) {
                 // Block send.
                 asyncResult.asyncContext.completed({ allowEvent: false });
             } else {
+                console.log('asyncResult', asyncResult);
                 console.log('not blocking email');
                 asyncResult.asyncContext.completed({ allowEvent: true });
             }
