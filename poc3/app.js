@@ -26,7 +26,7 @@ function validateToForDNE(event) {
                 });
                 if (dneEntriesInToEmail.length !== 0) {
                     let commaSepDneEntries = dneEntriesInToEmail.join(', ');
-                    mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'Please remove following DNE emails from To: ' + commaSepDneEntries });
+                    mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'Please remove following DNE emails from recipient list: ' + commaSepDneEntries });
                     asyncResult.asyncContext.completed({ allowEvent: false });
                 } else {
                     asyncResult.asyncContext.completed({ allowEvent: true });
