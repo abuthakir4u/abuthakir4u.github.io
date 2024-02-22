@@ -98,6 +98,12 @@
                 $('.cc-data').html(asyncResult.value[0].emailAddress);
             }
         );
+        Office.context.mailbox.item.body.getAsync(
+            { asyncContext: event },
+            function (asyncResult) {
+                $('.body-data').html(asyncResult.value);
+            }
+        );
     }
 
 </script>
