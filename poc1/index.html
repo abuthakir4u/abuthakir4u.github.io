@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,6 +19,13 @@
     <button id="helloButton">Add text to body</button>
     <button id="messageread">Read message9</button>
     <div id="item-subject"></div>
+
+    <table class="table table-striped">
+        <tr>
+            <td>Subject</td>
+            <td class="subject-data"></td>
+        </tr>
+      </table>
 
 </body>
 
@@ -28,6 +37,7 @@
             document.getElementById("messageread").onclick = run;
         }
     });
+
 
     /**
      * Writes 'Hello world!' to a new message body.
@@ -53,6 +63,8 @@
     }
 
     async function run() {
+
+        $('.subject-data').html('tset');
 
         Office.context.mailbox.item.subject.getAsync(
             { asyncContext: event },
