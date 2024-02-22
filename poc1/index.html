@@ -59,6 +59,7 @@
         Office.context.mailbox.item.to.getAsync(
             { asyncContext: event },
             function (asyncResult) {
+                console.log('asyncResult', asyncResult);
                 document.getElementById("item-subject").innerHTML += "<b>To:</b> <br/>" + asyncResult.value;
             }
         );
