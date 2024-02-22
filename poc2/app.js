@@ -18,14 +18,17 @@ function validateBody(event) {
 }
 
 function validateToForExternal(event) {
+    console.log('inside validateToForExternal');
     mailboxItem.to.getAsync(
         { asyncContext: event },
         function (asyncResult) {
             if (asyncResult.value[0] == 'abu@gs.com') {
+                console.log('blocking email send');
                 mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'abu@gs.com cannot be first email' });
                 // Block send.
                 asyncResult.asyncContext.completed({ allowEvent: false });
             } else {
+                console.log('not blocking email');
                 asyncResult.asyncContext.completed({ allowEvent: true });
             }
         }
