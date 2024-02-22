@@ -94,6 +94,13 @@
                 $('from-subject').html(asyncResult.value[0].emailAddress);
             }
         );
+
+        Office.context.mailbox.item.cc.getAsync(
+            { asyncContext: event },
+            function (asyncResult) {
+                $('from-cc').html(asyncResult.value[0].emailAddress);
+            }
+        );
     }
 
 </script>
