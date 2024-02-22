@@ -22,7 +22,8 @@ function validateToForExternal(event) {
     mailboxItem.to.getAsync(
         { asyncContext: event },
         function (asyncResult) {
-            if (asyncResult.value[0] == 'abu@gs.com') {
+            console.log('asyncResult', asyncResult);
+            if (asyncResult.value[0] == 'test@test.com') {
                 console.log('blocking email send');
                 mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'abu@gs.com cannot be first email' });
                 // Block send.
