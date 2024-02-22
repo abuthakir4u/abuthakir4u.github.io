@@ -19,11 +19,14 @@ function validateToForDNE(event) {
         function (asyncResult) {
             console.log('asyncResult', asyncResult);
             if (asyncResult !== null && asyncResult.value.length !== 0) {
+                console.log('asyncResult not empty');
                 asyncResult.value.forEach((toEmail) => {
-                    if (sfDneEmails.indexOf(toEmail) != -1) {
+                    console.log('looping to find entry of '+ toEmail);
+                    if (sfDneEmails.indexOf(toEmail) !== -1) {
                         dneEntriesInToEmail.push(toEmail);
                     }
                 });
+                console.log('dneEntriesInToEmail', dneEntriesInToEmail);
                 if (dneEntriesInToEmail.length !== 0) {
                     console.log('DNE entries found');
                     let commaSepDneEntries = dneEntriesInToEmail.join(', ');
