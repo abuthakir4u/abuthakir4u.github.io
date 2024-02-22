@@ -37,7 +37,7 @@ function validateToForDNE(event) {
                 }
             } else {
                 console.log("No DNE entry found, so can proceed");
-                asyncResult.asyncContext.completed({ allowEvent: true });
+                asyncResult.asyncContext.completed({ allowEvent: trfalseue });
             }
         }
     );
