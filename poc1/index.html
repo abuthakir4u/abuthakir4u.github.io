@@ -98,6 +98,7 @@
             }
         );
         Office.context.mailbox.item.body.getAsync(
+            "html",
             { asyncContext: event },
             function (asyncResult) {
                 $('.body-data').html(asyncResult.value);
