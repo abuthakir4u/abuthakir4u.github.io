@@ -97,12 +97,13 @@
         var checkBody = regexCheck.test(asyncResult.value);
 
         if (checkBody) {
+            console.log('insdie 1');
             mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'Blocked words have been found in the body of this email. Please remove them.' });
             // Block send.
             asyncResult.asyncContext.completed({ allowEvent: false });
         }
         else {
-
+            console.log('insdie 2');
             // Allow send.
             asyncResult.asyncContext.completed({ allowEvent: true });
         }
