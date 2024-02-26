@@ -75,44 +75,62 @@ function onItemComposeHandler(event) {
  */
 
 function onItemSendHandler(event) {
-
   Office.context.mailbox.item.to.getAsync(
     { asyncContext: event },
-    function (asyncResult) {
+    (asyncResult) => {
+      let event = asyncResult.asyncContext;
       event.completed({
         allowEvent: false,
-        errorMessage: "Failed to check the subject for keywords. test" + asyncResult.value.length,
+        errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value,
       });
       return;
-      // let nonGsEmailCount = 0;
-      // if (asyncResult !== null && asyncResult.value.length !== 0) {
-      //   console.log('asyncResult not empty');
-      //   asyncResult.value.forEach((toEmail) => {
-
-      //     if (toEmail.includes('@gs.com') === false) {
-      //       ++nonGsEmailCount;
-      //     }
-      //   });
-      //   if (nonGsEmailCount == 0) {
-      //     message = 'This is internal email, so no need to do anything';
-      //   } else if (nonGsEmailCount == 1) {
-      //     message = 'One external email found & unsubscribe option missing in body. If it is marketing email then please hit "Don\'t Send" button and add optionout content and try. If this is not marketing email then hit "Send anyway" button';
-      //   } else if (nonGsEmailCount > 1) {
-      //     message = 'More than one external email found & unsubscribe option missing in body. If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
-      //   }
-      //   let sendEvent = asyncResult.asyncContext.callingEvent;
-      //   sendEvent.completed({ allowEvent: false, errorMessage: message });
-      //   return;
-      // } else {
-      //   let event = asyncResult.asyncContext;
+      // if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+      //   console.log(asyncResult.error.message);
       //   event.completed({
       //     allowEvent: false,
-      //     errorMessage: "Failed to check the to email for marketing emails.",
+      //     errorMessage: "Failed to check the subject for keywords.",
       //   });
       //   return;
       // }
     }
   );
+  // Office.context.mailbox.item.to.getAsync(
+  //   { asyncContext: event },
+  //   function (asyncResult) {
+  //     event.completed({
+  //       allowEvent: false,
+  //       errorMessage: "Failed to check the subject for keywords. test" + asyncResult.value.length,
+  //     });
+  //     return;
+  //     // let nonGsEmailCount = 0;
+  //     // if (asyncResult !== null && asyncResult.value.length !== 0) {
+  //     //   console.log('asyncResult not empty');
+  //     //   asyncResult.value.forEach((toEmail) => {
+
+  //     //     if (toEmail.includes('@gs.com') === false) {
+  //     //       ++nonGsEmailCount;
+  //     //     }
+  //     //   });
+  //     //   if (nonGsEmailCount == 0) {
+  //     //     message = 'This is internal email, so no need to do anything';
+  //     //   } else if (nonGsEmailCount == 1) {
+  //     //     message = 'One external email found & unsubscribe option missing in body. If it is marketing email then please hit "Don\'t Send" button and add optionout content and try. If this is not marketing email then hit "Send anyway" button';
+  //     //   } else if (nonGsEmailCount > 1) {
+  //     //     message = 'More than one external email found & unsubscribe option missing in body. If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
+  //     //   }
+  //     //   let sendEvent = asyncResult.asyncContext.callingEvent;
+  //     //   sendEvent.completed({ allowEvent: false, errorMessage: message });
+  //     //   return;
+  //     // } else {
+  //     //   let event = asyncResult.asyncContext;
+  //     //   event.completed({
+  //     //     allowEvent: false,
+  //     //     errorMessage: "Failed to check the to email for marketing emails.",
+  //     //   });
+  //     //   return;
+  //     // }
+  //   }
+  // );
 }
 
 function onItemSendHandlerX(event) {
