@@ -81,7 +81,7 @@ function onItemSendHandler(event) {
     function (asyncResult) {
       event.completed({
         allowEvent: false,
-        errorMessage: "Failed to check the subject for keywords.",
+        errorMessage: " test Failed to check the subject for keywords." + asyncResult.value.length,
       });
       return;
       // let nonGsEmailCount = 0;
