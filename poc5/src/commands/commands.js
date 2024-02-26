@@ -81,7 +81,7 @@ function onItemSendHandler(event) {
       let event = asyncResult.asyncContext;
       let nonGsEmailCount = 0;
       asyncResult.value.forEach((toEmail) => {
-        if (toEmail.includes('@gs.com') === false) {
+        if (toEmail.emailAddress.includes('@gs.com') === false) {
           ++nonGsEmailCount;
         }
       });
