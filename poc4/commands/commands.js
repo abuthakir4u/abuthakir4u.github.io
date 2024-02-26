@@ -61,6 +61,7 @@ function onMessageRecipientsChangedHandler(event) {
  * @param {Office.AddinCommands.Event} event The OnMessageSend event object. 
  */
 function onMessageSendHandler(event) {
+  console.log('inside onMessageSendHandler');
   Office.context.mailbox.item.getAttachmentsAsync({ asyncContext: event }, (result) => {
     const event = result.asyncContext;
     if (result.status === Office.AsyncResultStatus.Failed) {
