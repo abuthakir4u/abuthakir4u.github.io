@@ -77,9 +77,9 @@
             <!-- Configures the add-in to launch when the specified events occur. -->
             <ExtensionPoint xsi:type="LaunchEvent">
               <LaunchEvents>
-                <LaunchEvent Type="OnMessageRecipientsChanged" FunctionName="onMessageRecipientsChangedHandler"/>
+                <!-- <LaunchEvent Type="OnMessageRecipientsChanged" FunctionName="onMessageRecipientsChangedHandler"/> -->
                 <LaunchEvent Type="OnMessageSend" FunctionName="onMessageSendHandler" SendMode="PromptUser"/>
-                <LaunchEvent Type="OnSensitivityLabelChanged" FunctionName="onSensitivityLabelChangedHandler"/>
+                <!-- <LaunchEvent Type="OnSensitivityLabelChanged" FunctionName="onSensitivityLabelChangedHandler"/> -->
               </LaunchEvents>
               <!-- Identifies the runtime to be used by the add-in (also referenced by the Runtime element). -->
               <SourceLocation resid="WebViewRuntime.Url" />
