@@ -88,14 +88,15 @@ function onItemSendHandler(event) {
       if (nonGsEmailCount == 0) {
         message = 'This is internal email, so no need to do anything';
       } else if (nonGsEmailCount == 1) {
-        message = 'One external email found & unsubscribe option missing in body. If it is marketing email then please hit "Don\'t Send" button and add optionout content and try. If this is not marketing email then hit "Send anyway" button';
+        message = 'One external email found & unsubscribe option missing in body. \n If it is marketing email then please hit "Don\'t Send" button and add optionout content and try. If this is not marketing email then hit "Send anyway" button';
       } else if (nonGsEmailCount > 1) {
-        message = 'More than one external email found & unsubscribe option missing in body. If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
+        message = 'More than one external email found & unsubscribe option missing in body. \n If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
       }
 
       event.completed({
         allowEvent: false,
-        errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value.length + message,
+        //errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value.length + message,
+        errorMessage: message,
       });
       return;
       // if (asyncResult.status === Office.AsyncResultStatus.Failed) {
