@@ -64,61 +64,64 @@ function onMessageSendHandler(event) {
   console.log('inside onMessageSendHandler');
   Office.context.mailbox.item.getAttachmentsAsync({ asyncContext: event }, (result) => {
     const event = result.asyncContext;
-    if (result.status === Office.AsyncResultStatus.Failed) {
-      console.log("Unable to check for attachments.");
-      console.log(`Error: ${result.error.message}`);
-      event.completed({ allowEvent: false, errorMessage: "Unable to check the message for attachments. Save your message, then restart Outlook." });
-      return;
-    }
 
-    const attachments = result.value;
-    if (attachments.length > 0 ) {
-      ensureHighlyConfidentialLabelSet(event);
-    } else {
-      Office.context.mailbox.item.to.getAsync({ asyncContext: event }, (result) => {
-        const event = result.asyncContext;
-        if (result.status === Office.AsyncResultStatus.Failed) {
-          console.log("Unable to get the recipients from the To field.");
-          console.log(`Error: ${result.error.message}`);
-          event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the To field. Save your message, then restart Outlook." });
-          return;
-        }
+    event.completed({ allowEvent: false, errorMessage: "Unable to check the message for attachments. Save your message, then restart Outlook." });
 
-        if (containsLegalTeamMember(result.value)) {
-          ensureHighlyConfidentialLabelSet(event);
-        } else {
-          Office.context.mailbox.item.bcc.getAsync({ asyncContext: event }, (result) => {
-            const event = result.asyncContext;
-            if (result.status === Office.AsyncResultStatus.Failed) {
-              console.log("Unable to get the recipients from the Bcc field.");
-              console.log(`Error: ${result.error.message}`);
-              event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the Bcc field. Save your message, then restart Outlook." });
-              return;
-            }
+    // if (result.status === Office.AsyncResultStatus.Failed) {
+    //   console.log("Unable to check for attachments.");
+    //   console.log(`Error: ${result.error.message}`);
+    //   event.completed({ allowEvent: false, errorMessage: "Unable to check the message for attachments. Save your message, then restart Outlook." });
+    //   return;
+    // }
 
-            if (containsLegalTeamMember(result.value)) {
-              ensureHighlyConfidentialLabelSet(event);
-            } else {
-              Office.context.mailbox.item.cc.getAsync({ asyncContext: event }, (result) => {
-                const event = result.asyncContext;
-                if (result.status === Office.AsyncResultStatus.Failed) {
-                  console.log("Unable to get the recipients from the Cc field.");
-                  console.log(`Error: ${result.error.message}`);
-                  event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the Cc field. Save your message, then restart Outlook." });
-                  return;
-                }
+    // const attachments = result.value;
+    // if (attachments.length > 0 ) {
+    //   ensureHighlyConfidentialLabelSet(event);
+    // } else {
+    //   Office.context.mailbox.item.to.getAsync({ asyncContext: event }, (result) => {
+    //     const event = result.asyncContext;
+    //     if (result.status === Office.AsyncResultStatus.Failed) {
+    //       console.log("Unable to get the recipients from the To field.");
+    //       console.log(`Error: ${result.error.message}`);
+    //       event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the To field. Save your message, then restart Outlook." });
+    //       return;
+    //     }
 
-                if (containsLegalTeamMember(result.value)) {
-                  ensureHighlyConfidentialLabelSet(event);
-                } else {
-                  event.completed({ allowEvent: true });
-                }
-              });
-            }
-          });
-        }
-      });
-    }
+    //     if (containsLegalTeamMember(result.value)) {
+    //       ensureHighlyConfidentialLabelSet(event);
+    //     } else {
+    //       Office.context.mailbox.item.bcc.getAsync({ asyncContext: event }, (result) => {
+    //         const event = result.asyncContext;
+    //         if (result.status === Office.AsyncResultStatus.Failed) {
+    //           console.log("Unable to get the recipients from the Bcc field.");
+    //           console.log(`Error: ${result.error.message}`);
+    //           event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the Bcc field. Save your message, then restart Outlook." });
+    //           return;
+    //         }
+
+    //         if (containsLegalTeamMember(result.value)) {
+    //           ensureHighlyConfidentialLabelSet(event);
+    //         } else {
+    //           Office.context.mailbox.item.cc.getAsync({ asyncContext: event }, (result) => {
+    //             const event = result.asyncContext;
+    //             if (result.status === Office.AsyncResultStatus.Failed) {
+    //               console.log("Unable to get the recipients from the Cc field.");
+    //               console.log(`Error: ${result.error.message}`);
+    //               event.completed({ allowEvent: false, errorMessage: "Unable to get the recipients from the Cc field. Save your message, then restart Outlook." });
+    //               return;
+    //             }
+
+    //             if (containsLegalTeamMember(result.value)) {
+    //               ensureHighlyConfidentialLabelSet(event);
+    //             } else {
+    //               event.completed({ allowEvent: true });
+    //             }
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
   });
 }
 
