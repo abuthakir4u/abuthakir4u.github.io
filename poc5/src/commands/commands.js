@@ -81,7 +81,7 @@ function onItemSendHandler(event) {
       let event = asyncResult.asyncContext;
       event.completed({
         allowEvent: false,
-        errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value,
+        errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value.length,
       });
       return;
       // if (asyncResult.status === Office.AsyncResultStatus.Failed) {
