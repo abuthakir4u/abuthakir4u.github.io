@@ -76,7 +76,6 @@ function onItemComposeHandler(event) {
 
 function onItemSendHandler(event) {
 
-
   Office.context.mailbox.item.to.getAsync(
     { asyncContext: event },
     function (asyncResult) {
@@ -96,19 +95,10 @@ function onItemSendHandler(event) {
         } else if (nonGsEmailCount > 1) {
           message = 'More than one external email found & unsubscribe option missing in body. If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
         }
-        // if (dneEntriesInToEmail.length !== 0) {
-        //     let commaSepDneEntries = dneEntriesInToEmail.join(', ');
-        //     mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'Please remove following DNE emails from recipient list: ' + commaSepDneEntries });
-        //     asyncResult.asyncContext.completed({ allowEvent: false });
-        // } else {
-        //     asyncResult.asyncContext.completed({ allowEvent: true });
-        // }
         let sendEvent = asyncResult.asyncContext.callingEvent;
         sendEvent.completed({ allowEvent: false, errorMessage: message });
         return;
       } else {
-        // console.log("No DNE entry found, so can proceed");
-        // asyncResult.asyncContext.completed({ allowEvent: true });
         let event = asyncResult.asyncContext;
         event.completed({
           allowEvent: false,
@@ -118,64 +108,9 @@ function onItemSendHandler(event) {
       }
     }
   );
-
-
-  Office.context.mailbox.item.subject.getAsync(
-    { asyncContext: event },
-    (asyncResult) => {
-      let event = asyncResult.asyncContext;
-
-      if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-        console.log(asyncResult.error.message);
-        event.completed({
-          allowEvent: false,
-          errorMessage: "Failed to check the subject for keywords.",
-        });
-        return;
-      }
-
-      let subject = asyncResult.value;
-      let detectedWords = [];
-      if (subject) {
-        detectedWords = checkForKeywords(KEYWORDS, subject);
-      }
-
-      let options = {
-        asyncContext: { callingEvent: event, keywordArray: detectedWords },
-      };
-      Office.context.mailbox.item.body.getAsync(
-        "text",
-        options,
-        (asyncResult) => {
-          let event = asyncResult.asyncContext.callingEvent;
-
-          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-            console.log(asyncResult.error.message);
-            event.completed({
-              allowEvent: false,
-              errorMessage: "Failed to check the body for keywords.",
-            });
-            return;
-          }
-
-          let body = asyncResult.value;
-          let detectedWords = asyncResult.asyncContext.keywordArray;
-          if (body) {
-            detectedWords = checkForKeywords(KEYWORDS, body, detectedWords);
-          }
-
-          if (detectedWords.length > 0) {
-            checkAppliedCategories(event, detectedWords);
-          } else {
-            event.completed({ allowEvent: true });
-          }
-        }
-      );
-    }
-  );
 }
 
-function onItemSendHandler_OLD(event) {
+function onItemSendHandlerX(event) {
   Office.context.mailbox.item.subject.getAsync(
     { asyncContext: event },
     (asyncResult) => {
