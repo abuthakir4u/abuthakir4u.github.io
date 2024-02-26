@@ -12,9 +12,9 @@ Office.onReady((info) => {
    * This ensures support in Outlook on Windows. 
    */
   if (Office.context.platform === Office.PlatformType.PC || Office.context.platform == null) {
-    Office.actions.associate("onMessageRecipientsChangedHandler", onMessageRecipientsChangedHandler);
+    //Office.actions.associate("onMessageRecipientsChangedHandler", onMessageRecipientsChangedHandler);
     Office.actions.associate("onMessageSendHandler", onMessageSendHandler);
-    Office.actions.associate("onSensitivityLabelChangedHandler", onSensitivityLabelChangedHandler);
+    //Office.actions.associate("onSensitivityLabelChangedHandler", onSensitivityLabelChangedHandler);
   }
 });
 
