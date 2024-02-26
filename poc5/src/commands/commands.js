@@ -11,7 +11,7 @@ Office.onReady();
  * @constant
  * @type {string[]}
  */
- const KEYWORDS = [
+const KEYWORDS = [
   "sales",
   "expense reports",
   "legal",
@@ -73,7 +73,109 @@ function onItemComposeHandler(event) {
  * applied to a new message or appointment before it's sent.
  * @param {Office.AddinCommands.Event} event The OnMessageSend or OnAppointmentSend event object.
  */
+
 function onItemSendHandler(event) {
+
+
+  Office.context.mailbox.item.to.getAsync(
+    { asyncContext: event },
+    function (asyncResult) {
+      let nonGsEmailCount = 0;
+      if (asyncResult !== null && asyncResult.value.length !== 0) {
+        console.log('asyncResult not empty');
+        asyncResult.value.forEach((toEmail) => {
+
+          if (toEmail.includes('@gs.com') === false) {
+            ++nonGsEmailCount;
+          }
+        });
+        if (nonGsEmailCount == 0) {
+          message = 'This is internal email, so no need to do anything';
+        } else if (nonGsEmailCount == 1) {
+          message = 'One external email found & unsubscribe option missing in body. If it is marketing email then please hit "Don\'t Send" button and add optionout content and try. If this is not marketing email then hit "Send anyway" button';
+        } else if (nonGsEmailCount > 1) {
+          message = 'More than one external email found & unsubscribe option missing in body. If it is marketing email then please create a individual email for each recipient with unsubscribe content.  If this is not marketing email then hit "Send anyway" button';
+        }
+        // if (dneEntriesInToEmail.length !== 0) {
+        //     let commaSepDneEntries = dneEntriesInToEmail.join(', ');
+        //     mailboxItem.notificationMessages.addAsync('NoSend', { type: 'errorMessage', message: 'Please remove following DNE emails from recipient list: ' + commaSepDneEntries });
+        //     asyncResult.asyncContext.completed({ allowEvent: false });
+        // } else {
+        //     asyncResult.asyncContext.completed({ allowEvent: true });
+        // }
+        let sendEvent = asyncResult.asyncContext.callingEvent;
+        sendEvent.completed({ allowEvent: false, errorMessage: message });
+        return;
+      } else {
+        // console.log("No DNE entry found, so can proceed");
+        // asyncResult.asyncContext.completed({ allowEvent: true });
+        let event = asyncResult.asyncContext;
+        event.completed({
+          allowEvent: false,
+          errorMessage: "Failed to check the to email for marketing emails.",
+        });
+        return;
+      }
+    }
+  );
+
+
+  Office.context.mailbox.item.subject.getAsync(
+    { asyncContext: event },
+    (asyncResult) => {
+      let event = asyncResult.asyncContext;
+
+      if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+        console.log(asyncResult.error.message);
+        event.completed({
+          allowEvent: false,
+          errorMessage: "Failed to check the subject for keywords.",
+        });
+        return;
+      }
+
+      let subject = asyncResult.value;
+      let detectedWords = [];
+      if (subject) {
+        detectedWords = checkForKeywords(KEYWORDS, subject);
+      }
+
+      let options = {
+        asyncContext: { callingEvent: event, keywordArray: detectedWords },
+      };
+      Office.context.mailbox.item.body.getAsync(
+        "text",
+        options,
+        (asyncResult) => {
+          let event = asyncResult.asyncContext.callingEvent;
+
+          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+            console.log(asyncResult.error.message);
+            event.completed({
+              allowEvent: false,
+              errorMessage: "Failed to check the body for keywords.",
+            });
+            return;
+          }
+
+          let body = asyncResult.value;
+          let detectedWords = asyncResult.asyncContext.keywordArray;
+          if (body) {
+            detectedWords = checkForKeywords(KEYWORDS, body, detectedWords);
+          }
+
+          if (detectedWords.length > 0) {
+            checkAppliedCategories(event, detectedWords);
+          } else {
+            event.completed({ allowEvent: true });
+          }
+        }
+      );
+    }
+  );
+}
+
+function onItemSendHandler_OLD(event) {
   Office.context.mailbox.item.subject.getAsync(
     { asyncContext: event },
     (asyncResult) => {
@@ -318,9 +420,8 @@ function checkAppliedCategories(event, detectedWords) {
 
       sendEvent.completed({ allowEvent: true });
     } else {
-      let message = `You must assign the following categories before your ${
-        Office.context.mailbox.item.itemType
-      } can be sent: ${requiredCategories.join(", ")}`;
+      let message = `You must assign the following categories before your ${Office.context.mailbox.item.itemType
+        } can be sent: ${requiredCategories.join(", ")}`;
       console.log(message);
       sendEvent.completed({ allowEvent: false, errorMessage: message });
       return;
@@ -341,7 +442,7 @@ function getMissingCategories(requiredCategories, appliedCategories) {
   return missingCategories;
 }
 
-Office.actions.associate("onMessageComposeHandler", onItemComposeHandler);
-Office.actions.associate("onAppointmentComposeHandler", onItemComposeHandler);
+//Office.actions.associate("onMessageComposeHandler", onItemComposeHandler);
+//Office.actions.associate("onAppointmentComposeHandler", onItemComposeHandler);
 Office.actions.associate("onMessageSendHandler", onItemSendHandler);
-Office.actions.associate("onAppointmentSendHandler", onItemSendHandler);
+//Office.actions.associate("onAppointmentSendHandler", onItemSendHandler);
