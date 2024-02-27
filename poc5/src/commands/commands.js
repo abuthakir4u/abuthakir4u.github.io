@@ -111,11 +111,11 @@ function onItemSendHandler(event) {
       }
 
       if (nonGsEmailCount == 0) {
-        message = 'This is internal email, so no need to do anything';
+        message = 'This is internal email, so no need to do anything..';
       } else if (nonGsEmailCount == 1) {
-        message = 'One external email found. Completed marketing acknowledgement with notification message';
+        message = 'One external email found. Completed marketing acknowledgement with notification message..';
       } else if (nonGsEmailCount > 1) {
-        message = 'More than one external email found. Completed marketing acknowledgement with notification message';
+        message = 'More than one external email found. Completed marketing acknowledgement with notification message..';
       }
 
       Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail", {
