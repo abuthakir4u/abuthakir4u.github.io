@@ -91,4 +91,4 @@ function onEmailSendHandler(event) {
 //Office.actions.associate("onAppointmentComposeHandler", onItemComposeHandler);
 //Office.actions.associate("onAppointmentSendHandler", onItemSendHandler);
 Office.actions.associate("onMessageSendHandler", onEmailSendHandler);
-Office.actions.associate("onMessageRecipientsChangedHandler", onRecipientChangeHandler);
+//Office.actions.associate("onMessageRecipientsChangedHandler", onRecipientChangeHandler);
