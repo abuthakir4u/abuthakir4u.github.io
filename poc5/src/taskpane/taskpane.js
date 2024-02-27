@@ -25,15 +25,23 @@ function setCallback(asyncResult) {
   if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
     console.log("Successfully set headers");
     //Office.context.mailbox.item.notificationMessages.removeAsync("notificationForMarketingEmail");
-    Office.context.mailbox.item.notificationMessages.replaceAsync("notificationForMarketingEmail", {
-      type: "insightMessage",
-      message: "Marketing Acknowledgement done successfully. Please hit Send button now to send email.",
-    });
-
+    Office.context.mailbox.item.notificationMessages.replaceAsync(
+      "notificationForMarketingEmail",
+      {
+        type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+        message: "Marketing Acknowledgement done successfully. Please hit Send button now to send email.",
+        icon: "icon2",
+        persistent: false
+      },
+      handleResult);
     Office.context.ui.closeContainer();
   } else {
     console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
   }
+}
+
+function handleResult(res) {
+  console.log("res", res);
 }
 
 // Get custom internet headers.
