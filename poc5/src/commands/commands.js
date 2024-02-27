@@ -132,6 +132,21 @@ function onItemSendHandler(event) {
         ],
       });
 
+      Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail1", {
+        type: "insightMessage",
+        message: "Please complete marketing email confirmation 1.",
+        icon: "Icon.16x16",
+        actions: [
+          {
+            actionType: "showTaskPane",
+            actionText: "Acknowledge Margeting",
+            commandId: "MessageComposeSelectButton",
+            contextData: "{''}",
+          },
+        ],
+      });
+
+
       event.completed({
         allowEvent: false,
         //errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value.length + message,
