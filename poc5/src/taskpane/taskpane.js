@@ -7,22 +7,19 @@ Office.onReady((info) => {
 
     Office.context.mailbox.item.getInitializationContextAsync((asyncResult) => {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          if (asyncResult.value.length > 0) {
-              // The value is a string, parse to an object.
-              console.log('asyncResult', asyncResult);
-              const context = JSON.parse(asyncResult.value);
-              console.log('asycontextncResult', context);
-              // Do something with context.
-          } else {
-              // Empty context, treat as no context.
-          }
+        if (asyncResult.value.length > 0) {
+          // The value is a string, parse to an object.
+          console.log('asyncResult', asyncResult);
+          const context = JSON.parse(asyncResult.value);
+          console.log('asycontextncResult', context);
+          // Do something with context.
+        } else {
+          // Empty context, treat as no context.
+        }
       } else {
-          // Handle the error.
+        // Handle the error.
       }
-  });
-
-
-
+    });
   }
 });
 
