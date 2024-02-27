@@ -100,20 +100,21 @@ function onItemSendHandler(event) {
                 message = 'More than one external email found. Completed marketing acknowledgement with notification message..';
               }
 
-              Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail", {
-                type: "insightMessage",
-                message: "Please complete marketing email confirmation.",
-                icon: "Icon.16x16",
-                actions: [
-                  {
-                    actionType: "showTaskPane",
-                    actionText: "Acknowledge Margeting",
-                    commandId: "MessageComposeSelectButton",
-                    contextData: "{''}",
-                  },
-                ],
-              });
-
+              if (nonGsEmailCount >= 1) {
+                Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail", {
+                  type: "insightMessage",
+                  message: "Please complete marketing email confirmation.",
+                  icon: "Icon.16x16",
+                  actions: [
+                    {
+                      actionType: "showTaskPane",
+                      actionText: "Acknowledge Margeting",
+                      commandId: "MessageComposeSelectButton",
+                      contextData: "{''}",
+                    },
+                  ],
+                });
+              }
               event.completed({
                 allowEvent: false,
                 errorMessage: message,

@@ -38,6 +38,7 @@ function setMarketingCustomHeaders() {
 function setCallback(asyncResult) {
   if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
     console.log("Successfully set headers");
+    Office.context.mailbox.item.notificationMessages.removeAsync("notificationForMarketingEmail");
   } else {
     console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
   }
