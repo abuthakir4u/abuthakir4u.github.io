@@ -4,37 +4,30 @@ Office.onReady((info) => {
     document.getElementById("apply-marketing").onclick = setMarketingCustomHeaders;
     document.getElementById("get-headers").onclick = getSelectedCustomHeaders;
 
-
-    Office.context.mailbox.item.getInitializationContextAsync((asyncResult) => {
-      console.log('test');
-      console.log(asyncResult);
-
-      let msg = "log message: " +  asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
-
-      $('#logMsg').html(msg);
-
-      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-        if (asyncResult.value.length > 0) {
-          // The value is a string, parse to an object.
-          console.log('asyncResult', asyncResult);
-          const context = JSON.parse(asyncResult.value);
-          console.log('asycontextncResult', context);
-          // Do something with context.
-        } else {
-          // Empty context, treat as no context.
+    Office.context.mailbox.item.to.getAsync(
+      { asyncContext: event },
+      (asyncResult) => {
+        let event = asyncResult.asyncContext;
+        let nonGsEmailCount = 0;
+        asyncResult.value.forEach((toEmail) => {
+          if (toEmail.emailAddress.includes('gs.com') === false) {
+            ++nonGsEmailCount;
+          }
+        });
+        if (nonGsEmailCount > 1) {
+          document.getElementById("apply-marketing").disabled = true;
         }
-      } else {
-        // Handle the error.
       }
-    });
+    );
   }
 });
 
 Office.context.mailbox.item.getInitializationContextAsync((asyncResult) => {
+  $('#logMsg').html("..............");
   console.log('test');
   console.log(asyncResult);
 
-  let msg = "log message: " +  asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
+  let msg = "log message: " + asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
 
   $('#logMsg').html(msg);
 
@@ -103,7 +96,7 @@ function getSelectedCustomHeaders() {
     console.log('test');
     console.log(asyncResult);
 
-    let msg = "log message: " +  asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
+    let msg = "log message: " + asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
 
     $('#logMsg').html(msg);
 
