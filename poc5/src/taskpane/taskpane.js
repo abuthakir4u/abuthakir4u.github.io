@@ -24,15 +24,12 @@ function setMarketingCustomHeaders() {
 function setCallback(asyncResult) {
   if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
     console.log("Successfully set headers");
-    Office.context.mailbox.item.notificationMessages.removeAsync("notificationForMarketingEmail");
+    //Office.context.mailbox.item.notificationMessages.removeAsync("notificationForMarketingEmail");
+    Office.context.mailbox.item.notificationMessages.replaceAsync("notificationForMarketingEmail", {
+      type: "insightMessage",
+      message: "Marketing Acknowledgement done successfully. Please hit Send button now to send email.",
+    });
 
-    const id = $("#notificationId").val().toString();
-    const details =
-    {
-      type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
-      message: "Marketing Acknowledgement done successfully. Please hit Send button now to send email",
-    };
-    Office.context.mailbox.item.notificationMessages.addAsync("marketingAckSuccessMsg", details);
     Office.context.ui.closeContainer();
   } else {
     console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
