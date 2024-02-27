@@ -93,6 +93,20 @@ function onItemSendHandler(event) {
         message = 'More than one external email found and unsubscribe option missing in body. \n\n If it is marketing email then click "Don\'t Sent" buttton and create a individual email for each recipient with unsubscribe content. \n\n If this is not marketing email then hit "Send anyway" button';
       }
 
+      Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail", {
+        type: "insightMessage",
+        message: "Please complete marketing email confirmation.",
+        icon: "Icon.16x16",
+        actions: [
+          {
+            actionType: "showTaskPane",
+            actionText: "Set signatures",
+            commandId: "MessageComposeSelectButton",
+            contextData: "{''}",
+          },
+        ],
+      });
+
       event.completed({
         allowEvent: false,
         //errorMessage: "custom failure....." + asyncResult.status + "--" + asyncResult.value.length + message,
