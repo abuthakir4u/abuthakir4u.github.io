@@ -112,6 +112,12 @@ function onItemSendHandler(event) {
                       commandId: "MessageComposeSelectButton",
                       contextData: "{''}",
                     },
+                    {
+                      actionType: "showTaskPane",
+                      actionText: "Acknowledge Margeting xyz",
+                      commandId: "MessageComposeSelectButton",
+                      contextData: "{''}",
+                    },
                   ],
                 });
               }
