@@ -35,7 +35,7 @@ function onItemSendHandler(event) {
                       actionType: "showTaskPane",
                       actionText: "Acknowledge Margeting",
                       commandId: "MessageComposeSelectButton",
-                      contextData: "{''}",
+                      contextData: "{'nonGsEmailCount': " +  nonGsEmailCount + "}",
                     }
                   ],
                 });
