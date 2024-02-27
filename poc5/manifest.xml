@@ -4,8 +4,8 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Abu: Office Add-ins Outlook Smart Alerts sample"/>
-  <Description DefaultValue="Abu: Use Outlook Smart Alerts to verify that required color categories are applied to a new message or appointment before it's sent."/>
+  <DisplayName DefaultValue="Marketing Email Acknowlegment"/>
+  <Description DefaultValue="Marketing Email Acknowlegment to verify external marketing email"/>
   <IconUrl DefaultValue="https://abuthakir4u.github.io/poc5/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://abuthakir4u.github.io/poc5/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>

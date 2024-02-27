@@ -15,7 +15,8 @@
     <script type="text/javascript" src="taskpane.js"></script>
 
     <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
-    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+    <link rel="stylesheet"
+        href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css" />
 
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
@@ -23,18 +24,34 @@
 
 <body class="ms-font-m ms-welcome ms-Fabric">
     <header class="ms-welcome__header ms-bgColor-neutralLighter">
-        <h1 class="ms-font-su">Marketing Email Confirmation</h1>
+        <h1 class="ms-font-su">Marketing Email Acknowlegment</h1>
     </header>
     <main id="app-body" class="ms-welcome__main">
-        <button id="apply-not-marketing" class="ms-Button">
-            <span class="ms-Button-label">This is not marketing email, ignore and send my email</span>
-        </button>
-
-        <button id="apply-marketing" class="ms-Button">
-            <span class="ms-Button-label">This is marketing email, send my email</span>
-        </button>
-
-        <button id="get-headers" class="ms-Button">
+        <div class="card">
+            <div class="card-header">
+                Non Marketing Email
+            </div>
+            <div class="card-body">
+                <p class="card-text">I confirm that all external email in the recipient list are not marketing emails.
+                </p>
+                <button id="apply-not-marketing" class="btn btn-primary">
+                    <span class="ms-Button-label">I Acknowledge</span>
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Marketing Email
+            </div>
+            <div class="card-body">
+                <p class="card-text">I confirm that the external email in the recipient list is marketing emails.
+                </p>
+                <button id="apply-marketing" class="btn btn-primary">
+                    <span class="ms-Button-label">This is marketing email, send my email</span>
+                </button>
+            </div>
+        </div>
+        <button id="get-headers">
             <span class="ms-Button-label">Get headers in console</span>
         </button>
 
