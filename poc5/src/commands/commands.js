@@ -1,6 +1,22 @@
 Office.onReady();
 
-function onItemSendHandler(event) {
+function onRecipientChangeHandler(event) {
+  Office.context.mailbox.item.internetHeaders.setAsync(
+    { "pwm-mar-check": "done", "is-marketing": "no" },
+    setCallback
+  );
+}
+
+function setCallback(asyncResult) {
+  if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+    console.log("Successfully set headers");
+    Office.context.mailbox.item.notificationMessages.removeAsync("notificationForMarketingEmail");
+  } else {
+    console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
+  }
+}
+
+function onEmailSendHandler(event) {
 
   Office.context.mailbox.item.internetHeaders.getAsync(
     ["pwm-mar-check"],
@@ -74,4 +90,5 @@ function onItemSendHandler(event) {
 //Office.actions.associate("onMessageComposeHandler", onItemComposeHandler);
 //Office.actions.associate("onAppointmentComposeHandler", onItemComposeHandler);
 //Office.actions.associate("onAppointmentSendHandler", onItemSendHandler);
-Office.actions.associate("onMessageSendHandler", onItemSendHandler);
+Office.actions.associate("onMessageSendHandler", onEmailSendHandler);
+Office.actions.associate("onMessageRecipientsChangedHandler", onRecipientChangeHandler);
