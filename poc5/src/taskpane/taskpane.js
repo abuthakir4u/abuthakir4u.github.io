@@ -10,13 +10,54 @@ Office.onReady((info) => {
     // document.getElementById("sideload-msg").style.display = "none";
     // document.getElementById("app-body").style.display = "flex";
     // getCategories();
-    document.getElementById("apply-categories").onclick = applyCategories;
-    document.getElementById("categories-container").onclick = function () {
-      clearElement("notification");
-    };
+    document.getElementById("apply-not-marketing").onclick = setNotMarketingCustomHeaders;
+    document.getElementById("apply-marketing").onclick = setMarketingCustomHeaders;
+    document.getElementById("get-headers").onclick = getSelectedCustomHeaders;
+    // document.getElementById("categories-container").onclick = function () {
+    //   clearElement("notification");
+    // };
     //getAppliedCategories();
   }
 });
+
+
+function setCustosetNotMarketingCustomHeadersmHeaders() {
+  Office.context.mailbox.item.internetHeaders.setAsync(
+    { "pwm-mar-check": "done", "is-marketing": "no" },
+    setCallback
+  );
+}
+
+function setMarketingCustomHeaders() {
+  Office.context.mailbox.item.internetHeaders.setAsync(
+    { "pwm-mar-check": "done", "is-marketing": "yes" },
+    setCallback
+  );
+}
+
+function setCallback(asyncResult) {
+  if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+    console.log("Successfully set headers");
+  } else {
+    console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
+  }
+}
+
+// Get custom internet headers.
+function getSelectedCustomHeaders() {
+  Office.context.mailbox.item.internetHeaders.getAsync(
+    ["pwm-mar-check", "is-marketing"],
+    getCallback
+  );
+}
+
+function getCallback(asyncResult) {
+  if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+    console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+  } else {
+    console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
+  }
+}
 
 /**
  * Get the categories associated with the event-based add-in.
@@ -54,6 +95,7 @@ function getCategories() {
       .appendChild(selection);
   });
 }
+
 
 /**
  * Apply the selected categories to the message or appointment.
