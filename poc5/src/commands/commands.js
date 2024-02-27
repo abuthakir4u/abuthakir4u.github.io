@@ -88,9 +88,9 @@ function onItemSendHandler(event) {
       if (nonGsEmailCount == 0) {
         message = 'This is internal email, so no need to do anything';
       } else if (nonGsEmailCount == 1) {
-        message = 'One external email found and unsubscribe option missing in body. \n\n If it is marketing email then please hit "Don\'t Send" button and add unsubscribe content and try. \n\n If this is not marketing email then hit "Send Anyway" button';
+        message = 'One external email found. Completed marketing acknowledgement with notification message';
       } else if (nonGsEmailCount > 1) {
-        message = 'More than one external email found and unsubscribe option missing in body. \n\n If it is marketing email then click "Don\'t Sent" buttton and create a individual email for each recipient with unsubscribe content. \n\n If this is not marketing email then hit "Send anyway" button';
+        message = 'More than one external email found. Completed marketing acknowledgement with notification message';
       }
 
       Office.context.mailbox.item.notificationMessages.addAsync("notificationForMarketingEmail", {
