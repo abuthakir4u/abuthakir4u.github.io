@@ -54,6 +54,8 @@ function getSelectedCustomHeaders() {
 function getCallback(asyncResult) {
   if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
     console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+    console.log('asyncResult.value', asyncResult.value);
+    console.log('asyncResult.value["pwm-mar-check"]', asyncResult.value["pwm-mar-check"])
   } else {
     console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
   }
