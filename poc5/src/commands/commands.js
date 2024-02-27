@@ -97,13 +97,13 @@ function onItemSendHandler(event) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
           headerCheck = JSON.stringify(asyncResult.value);
           Office.context.mailbox.item.notificationMessages.addAsync("headerMsg", {
-            type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+            type: Office.MailboxEnums.ItemNotificationMessageType.ErrorMessage,
             message: "header: " + JSON.stringify(asyncResult.value),
           });
           console.log("Selected headers: " + JSON.stringify(asyncResult.value));
         } else {
           Office.context.mailbox.item.notificationMessages.addAsync("headerMsg", {
-            type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+            type: Office.MailboxEnums.ItemNotificationMessageType.ErrorMessage,
             message: "unable to read header",
           });
           console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
