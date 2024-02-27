@@ -85,6 +85,32 @@ function onItemSendHandler(event) {
           ++nonGsEmailCount;
         }
       });
+
+      let headerCheck = "";
+
+      function getSelectedCustomHeaders() {
+        Office.context.mailbox.item.internetHeaders.getAsync(
+          ["pwm-mar-check", "is-marketing"],
+          getCallback
+        );
+      }
+      
+      function getCallback(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          headerCheck = JSON.stringify(asyncResult.value);
+          Office.context.mailbox.item.notificationMessages.addAsync("headerMsg", {
+            type: "insightMessage",
+            message: "header: " + JSON.stringify(asyncResult.value),
+          });
+          console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+        } else {
+          console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+
+      getSelectedCustomHeaders();
+
+
       if (nonGsEmailCount == 0) {
         message = 'This is internal email, so no need to do anything';
       } else if (nonGsEmailCount == 1) {

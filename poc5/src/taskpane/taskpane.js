@@ -21,7 +21,7 @@ Office.onReady((info) => {
 });
 
 
-function setCustosetNotMarketingCustomHeadersmHeaders() {
+function setNotMarketingCustomHeaders() {
   Office.context.mailbox.item.internetHeaders.setAsync(
     { "pwm-mar-check": "done", "is-marketing": "no" },
     setCallback
