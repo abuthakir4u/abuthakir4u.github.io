@@ -103,7 +103,7 @@
                 <!-- <LaunchEvent Type="OnNewMessageCompose" FunctionName="onMessageComposeHandler"/>
                 <LaunchEvent Type="OnNewAppointmentOrganizer" FunctionName="onAppointmentComposeHandler"/> -->
                 <LaunchEvent Type="OnMessageSend" FunctionName="onMessageSendHandler" SendMode="Block"/>
-                <LaunchEvent Type="OnMessageRecipientsChanged" FunctionName="onMessageRecipientsChangedHandler" SendMode="Block"/>
+                <!-- <LaunchEvent Type="OnMessageRecipientsChanged" FunctionName="onMessageRecipientsChangedHandler" SendMode="Block"/> -->
                 <!-- <LaunchEvent Type="OnAppointmentSend" FunctionName="onAppointmentSendHandler" SendMode="Block"/> -->
               </LaunchEvents>
               <!-- Identifies the runtime to be used by the add-in (also referenced by the Runtime element). -->
