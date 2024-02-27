@@ -7,14 +7,14 @@
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-    document.getElementById("sideload-msg").style.display = "none";
-    document.getElementById("app-body").style.display = "flex";
-    getCategories();
+    // document.getElementById("sideload-msg").style.display = "none";
+    // document.getElementById("app-body").style.display = "flex";
+    // getCategories();
     document.getElementById("apply-categories").onclick = applyCategories;
     document.getElementById("categories-container").onclick = function () {
       clearElement("notification");
     };
-    getAppliedCategories();
+    //getAppliedCategories();
   }
 });
 
