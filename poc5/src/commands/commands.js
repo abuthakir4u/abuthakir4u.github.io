@@ -88,28 +88,27 @@ function onItemSendHandler(event) {
 
       let headerCheck = "";
 
-      function getSelectedCustomHeaders() {
-        Office.context.mailbox.item.internetHeaders.getAsync(
-          ["pwm-mar-check", "is-marketing"],
-          getCallback
-        );
-      }
-      
+      Office.context.mailbox.item.internetHeaders.getAsync(
+        ["pwm-mar-check", "is-marketing"],
+        getCallback
+      );
+    
       function getCallback(asyncResult) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
           headerCheck = JSON.stringify(asyncResult.value);
           Office.context.mailbox.item.notificationMessages.addAsync("headerMsg", {
-            type: "insightMessage",
+            type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
             message: "header: " + JSON.stringify(asyncResult.value),
           });
           console.log("Selected headers: " + JSON.stringify(asyncResult.value));
         } else {
+          Office.context.mailbox.item.notificationMessages.addAsync("headerMsg", {
+            type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+            message: "unable to read header",
+          });
           console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
         }
       }
-
-      getSelectedCustomHeaders();
-
 
       if (nonGsEmailCount == 0) {
         message = 'This is internal email, so no need to do anything';
