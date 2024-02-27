@@ -80,7 +80,7 @@ function onItemSendHandler(event) {
     ["pwm-mar-check"],
     (headerFetchResult) => {
       if (headerFetchResult.status === Office.AsyncResultStatus.Succeeded) {
-        if (headerFetchResult.value != null && headerFetchResult.value["pwm-mar-check"] != "done") {
+        if (headerFetchResult.value === null || headerFetchResult.value["pwm-mar-check"] != "done") {
           Office.context.mailbox.item.to.getAsync(
             { asyncContext: event },
             (asyncResult) => {
