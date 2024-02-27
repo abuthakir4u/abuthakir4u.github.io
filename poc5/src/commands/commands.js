@@ -100,7 +100,7 @@ function onItemSendHandler(event) {
         actions: [
           {
             actionType: "showTaskPane",
-            actionText: "Set signatures",
+            actionText: "Acknowledge Margeting",
             commandId: "MessageComposeSelectButton",
             contextData: "{''}",
           },
