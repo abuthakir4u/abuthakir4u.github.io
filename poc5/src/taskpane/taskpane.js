@@ -7,6 +7,12 @@ Office.onReady((info) => {
 
     Office.context.mailbox.item.getInitializationContextAsync((asyncResult) => {
       console.log('test');
+      console.log(asyncResult);
+
+      let msg = "log message: " +  asyncResult + ", " + asyncResult.value + ", " + JSON.parse(asyncResult.value);
+
+      $('#logMsg').html(msg);
+
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
         if (asyncResult.value.length > 0) {
           // The value is a string, parse to an object.
