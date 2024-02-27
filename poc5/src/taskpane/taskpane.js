@@ -33,7 +33,12 @@ function setNotMarketingCustomHeaders() {
 
 function setMarketingCustomHeaders() {
   Office.context.mailbox.item.internetHeaders.setAsync(
-    { "pwm-mar-check": "done", "is-marketing": "yes", "List-Unsubscribe": "https://abuthakir4u.github.io/poc5/src/taskpane/taskpane.html" },
+    { 
+      "pwm-mar-check": "done", 
+      "is-marketing": "yes", 
+      "List-Unsubscribe": "<https://abuthakir4u.github.io/poc5/src/taskpane/taskpane.html>",
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+    },
     setCallback
   );
 }
