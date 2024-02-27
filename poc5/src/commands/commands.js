@@ -129,7 +129,11 @@ function onItemSendHandler(event) {
           return;
         }
       } else {
-        //Todo: handle error
+        event.completed({
+          allowEvent: false,
+          errorMessage: "Unable to read headers...",
+        });
+        return;
       }
     }
   );
