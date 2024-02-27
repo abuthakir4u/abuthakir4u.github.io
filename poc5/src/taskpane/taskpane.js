@@ -2,7 +2,6 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     document.getElementById("apply-not-marketing").onclick = setNotMarketingCustomHeaders;
     document.getElementById("apply-marketing").onclick = setMarketingCustomHeaders;
-    //document.getElementById("get-headers").onclick = getSelectedCustomHeaders;
 
     Office.context.mailbox.item.to.getAsync(
       { asyncContext: event },
